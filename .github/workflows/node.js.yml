@@ -35,6 +35,9 @@ jobs:
         host: ${{secrets.ssh_ip}}
         username: ${{secrets.ssh_username}}
         script: |
-          cd /home/devops/public_html/         
+          cd /home/devops/public_html/     
+          pm2 stop all
           git pull
           npm install
+          pm2 start npm -- start
+          
