@@ -35,7 +35,7 @@ jobs:
         host: ${{secrets.SSH_IP}}
         username: ${{secrets.SSH_USERNAME}}
         script: |
-          cd ~/home/devops/public_html/ci-cd-nodejs
+          cd ~/public_html/ci-cd-nodejs
           git pull origin master
           git status
           npm install --only=prod
