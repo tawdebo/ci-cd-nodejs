@@ -38,5 +38,5 @@ jobs:
           cd ~/public_html/ci-cd-nodejs
           git pull origin master
           git status
-          npm install --only=prod
-          pm2 npm -- start
+          /home/devops/bin/npm install --only=prod
+          /home/devops/bin/pm2 npm -- start
