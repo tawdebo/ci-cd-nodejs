@@ -30,12 +30,13 @@ jobs:
         run: |
           npm install
           git reset --hard
+
       - name: 📂 Sync folders and files to the server
         uses: SamKirkland/FTP-Deploy-Action@4.3.3
         with:
-          server: ${{ secrets.SSH_IP }}
-          username: ${{ secrets.SSH_USERNAME }}
-          password: ${{ secrets.SSH_PASSWORD }}
+          server: ${{ secrets.SSH_IP}}
+          username: ${{ secrets.SSH_USERNAME}}
+          password: ${{ secrets.FTP_PASSWORD}}
           script: |
             /home/devops/bin/pm2 delete all
             cd ~/public_html/
