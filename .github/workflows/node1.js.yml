@@ -36,5 +36,5 @@ jobs:
         username: ${{ secrets.SSH_USERNAME }}
         password: ${{ secrets.SSH_PASSWORD }}
         port: 22
-        local-dir: build/
+        local-dir: ~/public_html/
     
