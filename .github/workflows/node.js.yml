@@ -37,9 +37,3 @@ jobs:
           server: ${{ secrets.SSH_IP}}
           username: ${{ secrets.SSH_USERNAME}}
           password: ${{ secrets.FTP_PASSWORD}}
-          script: |
-            /home/devops/bin/pm2 delete all
-            cd ~/public_html/
-            git pull
-            /home/devops/bin/npm install
-            /home/devops/bin/pm2 start npm -- start
