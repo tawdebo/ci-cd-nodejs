@@ -30,9 +30,10 @@ jobs:
     - name: SSH Remote Commands
       uses: appleboy/ssh-action@v0.1.2
       with:
-        key: ${{secrets.ssh_key}}
-        host: ${{secrets.ssh_ip}}
-        username: ${{secrets.ssh_username}}
+        key: ${{secrets.SSH_KEY}}
+        port: 22
+        host: ${{secrets.SSH_IP}}
+        username: ${{secrets.SSH_USERNAME}}
         script: |
           pm2 delete all
           cd /home/devops/public_html
