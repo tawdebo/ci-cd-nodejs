@@ -30,12 +30,12 @@ jobs:
     - name: SSH Remote Commands
       uses: appleboy/ssh-action@v0.1.2
       with:
-        key: ${{secrets.GOOGLE_CLOUD_VM_SSH}}
-        host: ${{secrets.GOOGLE_CLOUD_VM_IP}}
-        username: ${{secrets.GOOGLE_CLOUD_VM_USERNAME}}
+        key: ${{secrets.ssh_key}}
+        host: ${{secrets.ssh_ip}}
+        username: ${{secrets.ssh_username}}
         script: |
           pm2 delete all
-          cd /var/app/tdd-nodejs
+          cd /home/devops/public_html
           git pull
           npm install
           pm2 start npm -- start
