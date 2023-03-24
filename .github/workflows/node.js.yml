@@ -34,9 +34,9 @@ jobs:
         port: 22
         host: ${{secrets.SSH_IP}}
         username: ${{secrets.SSH_USERNAME}}
-        script: |
-          pm2 delete all
-          cd /home/devops/public_html
-          git pull
-          npm install
-          pm2 start npm -- start
+          script: |
+              cd ~/home/devops/public_html/ci-cd-nodejs
+              git pull origin master
+              git status
+              npm install --only=prod
+              pm2 npm -- start
