@@ -34,7 +34,7 @@ jobs:
       with:
         server: ${{ secrets.SSH_IP }}
         username: ${{ secrets.SSH_USERNAME }}
-        key: ${{ secrets.SSH_KEY }}
+        paasword: ${{ secrets.SSH_PASSWORD }}
         port: 22
         local-dir: build/
     
