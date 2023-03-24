@@ -36,7 +36,7 @@ jobs:
         username: ${{secrets.SSH_USERNAME}}
         script: |
           cd ~/public_html/ci-cd-nodejs
-          git pull origin master
-          git status
-          /home/devops/bin/npm install --only=prod
-          /home/devops/bin/pm2 npm -- start
+          /home/devops/bin/pm2 delete all
+          git pull
+          /home/devops/bin/npm install
+          /home/devops/bin/pm2 start npm -- start
