@@ -35,7 +35,7 @@ jobs:
         host: ${{secrets.ssh_ip}}
         username: ${{secrets.ssh_username}}
         script: |
-          cd /home/devops/public_html
+          cd /var/app/tdd-nodejs
           pm2 delete all
           git pull
           npm install
