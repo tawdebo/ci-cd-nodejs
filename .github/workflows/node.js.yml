@@ -1,44 +1,56 @@
-# Deploy on cPanel
-name: 🚀 Deploy on push master
+name: CICD for Youtube
 
-on: 
+on:
   push:
-    branches:    
-      - master 
+    branches:
+        - main
 
 jobs:
-  web-deploy:
-    name: 🎉 Deploy
+  build:
     runs-on: ubuntu-latest
-    
     strategy:
       matrix:
-        node-version: [16.x]
-    
+        node-version: [14.x]
+
     steps:
-    - name: 🚚 Get latest code
-      uses: actions/checkout@v2
+      - uses: actions/checkout@v2
+      - name: Use node js
+        uses: actions/setup-node@v1
+        with:
+         node-version: ${{ matrix.node-version }}
+      - name: npm install and build
+        run: |
+          npm install
+          npm run build
 
-    - name: Use Node.js ${{ matrix.node-version }}
-      uses: actions/setup-node@master
-      with:
-        node-version: ${{ matrix.node-version }}
-    
-    - name: Copy .env.prod.example to .env
-      run: cp .env.prod.example .env
+        env: 
+          CI: true   
 
-    - name: 🔨 Build Project 
-      run: |
-        npm install
-        npm run build
-    
-    - name: List output files
-      run: find build/ -print
 
-    - name: 📂 Sync files
-      uses: SamKirkland/FTP-Deploy-Action@4.3.3
-      with:
-        server: ${{ secrets.SERVER }}
-        username: ${{ secrets.FTP_USERNAME }}
-        password: ${{ secrets.FTP_PASSWORD }}
-        local-dir: build/
+  depoly:
+    needs: [build]
+    runs-on: ubuntu-latest
+
+    steps:
+     - name: SSH deploy
+       uses: appleboy/ssh-action@master
+       with:
+          host: ${{ secrets.SSH_IP }}
+          username:  ${{ secrets.SSH_USERNAME }}
+          key:  ${{ secrets.SSH_KEY }}
+          port:  22
+          script: |
+              curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
+              . ~/.nvm/nvm.sh
+
+               nvm instal 14
+               npm install -g pm2
+               cd ~/CICD
+               git pull origin main
+               npm install
+               npm run build
+               pm2 restart api
+            
+
+
+
