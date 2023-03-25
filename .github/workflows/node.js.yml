@@ -10,12 +10,12 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        node-version: [14.x]
+        node-version: [16.x]
 
     steps:
       - uses: actions/checkout@v2
       - name: Use node js
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3.6.0
         with:
          node-version: ${{ matrix.node-version }}
       - name: npm install and build
@@ -42,9 +42,9 @@ jobs:
               curl -o-   https://raw.githubusercontent.com/creationix/nvm/v0.33.8/install.sh    | bash
               . ~/.nvm/nvm.sh
                apt-get install node
-               nvm instal 14
+               nvm instal 16
                npm install -g pm2
-               cd ~/CICD
+               cd ~/home/ubuntu
                git pull origin main
                npm install
                npm run build
