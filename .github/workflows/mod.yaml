@@ -33,8 +33,8 @@ jobs:
                node -v
                npm install -g pm2
                cd /home/ubuntu
-               git clone https://github.com/tawdebo/ci-cd-nodejs.git
-               cd /home/ubuntu/ci-cd-nodejs
+               git clone https://github.com/tawdebo/react-nodejs.git
+               cd /home/ubuntu/react-nodejs
                npm install
                npm run build
                pm2 delete all
